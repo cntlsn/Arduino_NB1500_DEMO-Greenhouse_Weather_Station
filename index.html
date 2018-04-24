@@ -152,6 +152,13 @@
             width: auto !important; /* overrides inline */
             /*max-width: 300px;*/
             display: block;
+            /*fill: #eeeee;*/
+        }
+        .property .number {
+            font-weight: 100;
+            font-size: 18px;
+            color: #00979D;
+            margin-left: .2em;
         }
     </style>
 </head>
@@ -312,7 +319,7 @@
 
         <div id="container_properties">
             <div class="property">
-                <p>Light: {{lightReading}}</p>
+                <p>Light <span class="number">{{lightReading}} &#13267;</span></p>
                 <!-- <svg width="167px" height="163px" viewBox="0 0 167 163" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <ellipse cx="81" cy="81" rx="20" ry="20" id="light_svg" />
                 </svg> -->
@@ -343,7 +350,7 @@
             </div>
 
             <div class="property">
-                <p>Temp: {{tempReading}}</p>
+                <p>Temperature <span class="number">{{tempReading}} &#8451;</span></p>
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43.5px" height="105px" viewBox="211.25 462.75 43.5 105" enable-background="new 211.25 462.75 43.5 105"
      xml:space="preserve">
                     <g>
@@ -355,19 +362,19 @@
                             <stop offset="51%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
                             <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" /> -->
                         </linearGradient>
-                        <path fill="url(#tempGrad)" d="M238.553,533.888v-58.38c0-3.011-2.464-5.475-5.475-5.475s-5.475,2.464-5.475,5.475v58.38
+                        <path fill="url(#tempGrad)" stroke="#7FCBCD" stroke-width="3" d="M238.553,533.888v-58.38c0-3.011-2.464-5.475-5.475-5.475s-5.475,2.464-5.475,5.475v58.38
                             c-5.063,2.138-8.617,7.146-8.617,12.987c0,7.783,6.309,14.092,14.091,14.092s14.091-6.309,14.091-14.092
                             C247.169,541.035,243.616,536.025,238.553,533.888z"/>
-                        <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M233.007,565.524c-10.407,0-18.874-8.468-18.874-18.874c0-5.978,2.879-11.665,7.7-15.213l0.24-0.174
+                        <!-- <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M233.007,565.524c-10.407,0-18.874-8.468-18.874-18.874c0-5.978,2.879-11.665,7.7-15.213l0.24-0.174
                             c0.744-0.529,1.102-1.389,1.035-2.237c0.004-0.06,0.018-0.117,0.018-0.179v-53.442c0-5.448,4.432-9.881,9.88-9.881
                             c5.449,0,9.881,4.433,9.881,9.881v53.502c0,0.057,0.012,0.108,0.016,0.163c-0.051,0.833,0.308,1.673,1.038,2.194
-                            c0.158,0.113,0.315,0.229,0.475,0.35c4.744,3.606,7.464,9.087,7.464,15.037C251.879,557.058,243.414,565.524,233.007,565.524z"/>
+                            c0.158,0.113,0.315,0.229,0.475,0.35c4.744,3.606,7.464,9.087,7.464,15.037C251.879,557.058,243.414,565.524,233.007,565.524z"/> -->
                     </g>
                 </svg>
             </div>
 
             <div class="property">
-                <p>Humidity: {{humidityReading}}</p>
+                <p>Humidity <span class="number">{{humidityReading}} %</span></p>
                 <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96.378px" height="167.455px" viewBox="0 0 96.378 167.455" enable-background="new 0 0 96.378 167.455" xml:space="preserve">
                     <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M48.188,157.019c-14.124,0-27.25-7.375-35.114-19.727c-8.598-13.508-9.389-30.119-2.169-45.573
                         c5.263-11.274,9.796-20.298,13.795-28.26C32.348,48.235,38.952,35.087,47.21,13.1l1-2.663l0.962,2.676
@@ -385,11 +392,12 @@
                         c5.106,14.197,9.437,22.69,14.452,32.525c2.645,5.186,5.642,11.064,9.076,18.42l0,0c4.678,10.018,4.164,20.783-1.409,29.538
                         C48.117,93.553,39.61,98.332,30.458,98.332z"/>
                 </svg>
+                <!-- <span style="display: inline-block; float: right;">{{humidityReading}}</span> -->
             </div>
 
             <div class="property">
-                <p>RSSI: {{rssiReading}}</p>
-                <svg width="97px" height="68px" viewBox="0 0 97 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#a5aeaf">
+                <p>WiFi signal <span class="number">{{rssiReading}}</span></p>
+                <svg style="margin-top: 20px;" width="97px" height="68px" viewBox="0 0 97 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#a5aeaf">
                     <path d="M35.7142857,54.9631127 L49,68 L62.2857143,54.9631127 C54.9785714,47.7493684 43.0657143,47.7493684 35.7142857,54.9631127" id="wifi_lo"></path>
 
                     <path d="M18,37.5805963 L26.8571429,46.2718545 C39.08,34.2779181 58.92,34.2779181 71.1428571,46.2718545 L80,37.5805963 C62.9057143,20.8064679 35.1385714,20.8064679 18,37.5805963 " id="wifi_mid"></path>
