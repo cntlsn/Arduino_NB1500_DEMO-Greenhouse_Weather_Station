@@ -228,7 +228,8 @@
                 // } else {
                 //     document.getElementById("light_svg").style.fill = "black";
                 // }
-                $scope.mappedLightVal = (map(lightVal, 0, 1023, 0, 1)); 
+                // $scope.mappedLightVal = (map(lightVal, 0, 1023, 0, 1));
+                $scope.mappedLightVal = (map(lightVal, 0, 1023, 80, 0)); 
 
                 // RSSI FUNCTION
                 if (rssiVal < -80) {
@@ -312,10 +313,19 @@
                 <svg version="1.1" id="Layer_1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="73.5px"
      height="105.875px" viewBox="109 522.75 73.5 105.875" enable-background="new 109 522.75 73.5 105.875" xml:space="preserve">
-                    <path fill="yellow" fill-opacity="{{mappedLightVal}}" stroke="#7FCBCD" stroke-width="3" d="M146.058,525.502c-7.574,0-15.149,2.735-21.116,8.203c-11.698,10.719-13.46,28.506-4.245,41.3
+                    <linearGradient id="lightGrad" x1="0" x2="0" y1="0" y2="100%">
+                        <stop offset="{{mappedLightVal}}%" stop-color="white"/>
+                        <!-- <stop offset="0%" stop-color="white"/> -->
+                        <stop offset="0%" stop-color="yellow"/>
+                    </linearGradient>
+                    <path fill="url(#lightGrad)" stroke="#7FCBCD" stroke-width="3" d="M146.058,525.502c-7.574,0-15.149,2.735-21.116,8.203c-11.698,10.719-13.46,28.506-4.245,41.3
                         c4.289,5.524,6.609,12.287,6.609,19.244c0,1.656,0.66,3.247,1.831,4.419c1.172,1.172,2.762,1.831,4.419,1.831h25.002
                         c1.657,0,3.248-0.659,4.419-1.831c1.171-1.172,1.831-2.763,1.831-4.419c0-6.957,2.295-13.736,6.584-19.261
                         c9.215-12.793,7.478-30.564-4.22-41.283C161.207,528.237,153.631,525.502,146.058,525.502z" />
+                    <!-- <path fill="yellow" fill-opacity="{{mappedLightVal}}" stroke="#7FCBCD" stroke-width="3" d="M146.058,525.502c-7.574,0-15.149,2.735-21.116,8.203c-11.698,10.719-13.46,28.506-4.245,41.3
+                        c4.289,5.524,6.609,12.287,6.609,19.244c0,1.656,0.66,3.247,1.831,4.419c1.172,1.172,2.762,1.831,4.419,1.831h25.002
+                        c1.657,0,3.248-0.659,4.419-1.831c1.171-1.172,1.831-2.763,1.831-4.419c0-6.957,2.295-13.736,6.584-19.261
+                        c9.215-12.793,7.478-30.564-4.22-41.283C161.207,528.237,153.631,525.502,146.058,525.502z" /> -->
                     <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M133.557,604.666
                         c-1.151-0.016-2.097,0.903-2.113,2.055c-0.017,1.15,0.903,2.097,2.054,2.112c0.02,0.001,0.04,0.001,0.059,0h25.002
                         c1.151,0.017,2.097-0.903,2.113-2.054s-0.903-2.097-2.054-2.113c-0.02,0-0.04,0-0.059,0H133.557z M133.557,613
@@ -332,14 +342,12 @@
      xml:space="preserve">
                     <g>
                         <linearGradient id="tempGrad" x1="0" x2="0" y1="0" y2="100%">
-                            <!-- <stop offset="{{mappedTempVal}}%" stop-color="white"/> -->
-                            <!-- <stop offset="0%" stop-color="white"/> -->
-                            <!-- <stop offset="90%" stop-color="blue"/>
-                            <stop offset="0%" stop-color="#00979D"/> -->
                             <stop offset="{{mappedTempVal}}%" stop-color="white"/>
+                            <stop offset="0%" stop-color="red"/>
+                            <!-- <stop offset="{{mappedTempVal}}%" stop-color="white"/>
                             <stop offset="0%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
                             <stop offset="51%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" /> -->
                         </linearGradient>
                         <path fill="url(#tempGrad)" d="M238.553,533.888v-58.38c0-3.011-2.464-5.475-5.475-5.475s-5.475,2.464-5.475,5.475v58.38
                             c-5.063,2.138-8.617,7.146-8.617,12.987c0,7.783,6.309,14.092,14.091,14.092s14.091-6.309,14.091-14.092
