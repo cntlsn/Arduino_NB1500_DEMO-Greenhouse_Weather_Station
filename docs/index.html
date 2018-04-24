@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="utf-8">
+    <title>Thingspeak Light</title>
+    <meta name="viewport" content="width=device-width">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <script src="http://code.angularjs.org/1.2.6/angular.min.js"></script> 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <!-- <script src="https://developer.relayr.io/relayr-browser-sdk.min.js"></script> -->
+    <style type="text/css">
+        *, *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            /*background-color: rgb(132,254,213);*/
+            background-color: rgb(236,241,241);
+            /*text-align: center;*/
+            width: 100%;
+            height: 100%;
+            margin: 0!important;
+            padding: 0!important;
+            /*margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;*/
+            line-height: 1;
+            /*font-family: Helvetica-neue, Arial, sans-serif;*/
+            font-family: typonine, Helvetica-neue, Arial, sans-serif;
+            font-size: 16px;
+            color: #005C5F;
+        }
+        #reading{
+            background-color: yellow;
+            
+            /*padding: 1em 0;*/
+            
+            /*overflow: visible;*/
+            margin: 0 auto;
+            /*box-sizing: border-box;*/
+            position: absolute;
+            bottom: 30%;
+            right: 60%;
+            /*z-index: -1;*/
+
+            border-radius: 50%;
+            /*width: calc(70%/1.8);
+            height: 70%;*/
+        }
+        #reading01{
+            background-color: rgb(120,151,234);
+        }
+        p {
+            white-space: pre;
+            /*padding: 1em;*/
+            text-align: center;
+            font-size: 250%;
+            font-weight: bold;
+            /*color: rgb(120,151,234);*/
+            color: #FFFFFF;
+            z-index: 1;
+        }
+
+
+
+        #header{
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            width: 100%;
+            height: 53px;
+            background-color: #FFFFFF;
+            padding-top: 2px;
+        }
+        #header div{
+            margin: 1em;
+        }
+        #wrapper{
+            margin: 0 1em;
+            /*border: 1px solid black;*/
+        }
+        #thing_header{
+            font-weight: 100;
+            font-size: 14px;
+            letter-spacing: .15em;
+            line-height: 1.4;
+            margin-top: 31px;
+            margin-bottom: 15px;
+            color: #2d353a;
+        }
+        .thing_name{
+            font-size: 25px;
+        }
+        .user_name{
+            color: #00979D;
+        }
+        #container_properties{
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .property{
+            background-color: #FFFFFF;
+            width: calc(50% - 4px);
+            height: 180px; 
+            /*height: 163px;*/
+            flex-shrink: 0;
+            /* border: 1px solid red; */
+            /* margin: 4px; */
+            margin-bottom: 8px;
+            
+            /*display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-justify-content: center;
+            justify-content: center;*/
+        }
+        .property p{
+            font-weight: 600;
+            font-size: 16px;
+            color: #005C5F;
+            text-align: left;
+            margin-left: 1em;
+        }
+        .property svg {
+            margin: 0 auto; /* poor attempt at centering */
+            height: auto !important; /* overrides inline */
+            width: auto !important; /* overrides inline */
+            /*max-width: 300px;*/
+            display: block;
+        }
+    </style>
+</head>
+
+<script> 
+    // var reading = document.getElementById('reading');
+    // var devId = "3b9ffee6-f208-47f4-a1ed-34ef2944d9cd";  // Light
+    // var token =  "D2wwWUF.cXGux87O0mTvNEy.EIvBxWhJ";
+    // var relayr = RELAYR.init({
+    //     appId: "0414a1d5-e372-4dfe-bf6a-d7ff305eb66c"
+    // });
+
+    // $(document).ready(function() {
+
+    //     // getUpdates();
+
+    //     // // check for new updates
+    //     // setInterval('getUpdates()', 5000);
+
+    //     // ArduinoCtrl();
+    //     // setInterval('ArduinoCtrl()', 2000);
+    //     // setInterval('getData', 2000);
+    // });
+
+    function ArduinoCtrl($scope, $interval)
+    {
+        // $scope.setServo = function(value) {
+        //     var device = {
+        //         deviceId: devId,
+        //         token: token,
+        //         command: {"command":"servo","value":value}
+        //     };
+        //     relayr.devices().sendCommand(device);
+        // };
+
+        //  relayr.devices().getDeviceData({
+        //    deviceId: devId, 
+        //    token: token,
+        //    incomingData: function(data){
+        //      console.log("sensor",data);
+        //      $scope.lightReading = data.readings[0].value;
+        //      $scope.mappedLightReading = parseInt(map(data.readings[0].value, 0, 4096, 1, 170));
+        //      $scope.proxReading = data.readings[2].value;
+        //      $scope.mappedProxReading = parseInt(map(data.readings[0].value, 0, 2047, 1, 170));
+        //      // $scope.mappedVal = map(data.readings[0].value, 0, 1024, 0, 100);
+        //      $scope.$digest();
+        //    }
+        // });
+        $interval(function getData(){
+            $.getJSON('https://api.thingspeak.com/channels/477356/feed/last.json?callback=?', function(data) {
+
+                console.log("light:", data.field1);
+                console.log("temp:", data.field2);
+                console.log("humidity:", data.field3);
+                console.log("rssi:", data.field4);
+
+                var lightVal = data.field1;
+                var tempVal = data.field2;
+                var humidityVal = data.field3;
+                var rssiVal = data.field4;
+
+                $scope.lightReading = lightVal;
+                $scope.tempReading = tempVal;
+                $scope.humidityReading = humidityVal;
+                $scope.rssiReading = rssiVal;
+                $scope.$digest();
+                // console.log(lightReading);
+
+
+                // LIGHT FUNCTION
+                // if (lightVal > 900) {
+                //     document.getElementById("light_svg").style.fill = "yellow";
+                //     // console.log("HERE!");
+                // } else {
+                //     document.getElementById("light_svg").style.fill = "black";
+                // }
+                $scope.mappedLightVal = (map(lightVal, 0, 1023, 0, 1)); 
+
+                // RSSI FUNCTION
+                if (rssiVal < -80) {
+                    document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                    document.getElementById("wifi_mid").style.fill = "#a5aeaf";
+                    document.getElementById("wifi_lo").style.fill = "#00979D";
+                } else if (rssiVal > -81 && rssiVal < -67) {
+                    document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                    document.getElementById("wifi_mid").style.fill = "#00979D";
+                    document.getElementById("wifi_lo").style.fill = "#00979D";
+                } else if (rssiVal > -68) {
+                    document.getElementById("wifi_hi").style.fill = "#00979D";
+                    document.getElementById("wifi_mid").style.fill = "#00979D";
+                    document.getElementById("wifi_lo").style.fill = "#00979D";
+                } else {
+                    document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                    document.getElementById("wifi_mid").style.fill = "#a5aeaf";
+                    document.getElementById("wifi_lo").style.fill = "#a5aeaf";
+                } 
+
+                // HUMIDITY FUNCTION
+                $scope.mappedHumidityVal = (map(humidityVal, 0, 100, 130, 0));  
+                // console.log("MAPPED HUMIDITY:", mappedHumidityReading); 
+
+                // TEMP FUNCTION
+                $scope.mappedTempVal = (map(tempVal, 0, 100, 50, 0));                        
+            })
+        }, 5000); 
+    };
+
+    function map(x, in_min, in_max, out_min, out_max) {
+      return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    };
+
+
+
+    // function rssi(){
+    //     if (rssiReading > "-90" && rssiReading < ) {}
+    // }
+
+
+</script>
+
+<body ng-controller="ArduinoCtrl" class="container">
+    <div id="header">
+        <div>
+            <img src="assets/Global-Menu_Home-BBCube_teal.svg">
+        </div>
+        <div style="flex: 1 0 0; text-align: center;">
+            <img src="assets/Cloud-logo_compressed.svg">
+        </div>
+        <!-- <div style="border-radius: 100%; background-color: #000; width: 26px; height: 26px;"> -->
+        <div>
+            <img src="assets/Global-user-profile.svg">
+        </div>    
+    </div>
+
+    <div id="wrapper">
+
+        <div id="thing_header">
+            <span class="thing_name" style="font-family: typonine; font-weight: normal;">Greenhouse01</span>
+            <br>
+            <span>Dashboard by</span>
+            <span class="user_name">La Collinella</span>
+        </div>
+
+        <div>
+            <!-- <div id="reading"></div> -->
+            <!-- <p>Noise level: {{reading}}</p> -->
+            <!-- <div id="reading" style="height:{{mappedVal}}%"></div> -->
+            <!-- <div id="reading" style="height:{{mappedLightReading}}%; width:calc({{mappedLightReading}}%/1.8);"></div> -->
+            <!-- <div id="reading01" style="height:{{mappedProxReading}}%; width:calc({{mappedProxReading}}%/1.8);"></div> -->   
+        </div>
+
+        <div id="container_properties">
+            <div class="property">
+                <p>Light: {{lightReading}}</p>
+                <!-- <svg width="167px" height="163px" viewBox="0 0 167 163" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <ellipse cx="81" cy="81" rx="20" ry="20" id="light_svg" />
+                </svg> -->
+                <svg version="1.1" id="Layer_1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="73.5px"
+     height="105.875px" viewBox="109 522.75 73.5 105.875" enable-background="new 109 522.75 73.5 105.875" xml:space="preserve">
+                    <path fill="yellow" fill-opacity="{{mappedLightVal}}" stroke="#7FCBCD" stroke-width="3" d="M146.058,525.502c-7.574,0-15.149,2.735-21.116,8.203c-11.698,10.719-13.46,28.506-4.245,41.3
+                        c4.289,5.524,6.609,12.287,6.609,19.244c0,1.656,0.66,3.247,1.831,4.419c1.172,1.172,2.762,1.831,4.419,1.831h25.002
+                        c1.657,0,3.248-0.659,4.419-1.831c1.171-1.172,1.831-2.763,1.831-4.419c0-6.957,2.295-13.736,6.584-19.261
+                        c9.215-12.793,7.478-30.564-4.22-41.283C161.207,528.237,153.631,525.502,146.058,525.502z" />
+                    <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M133.557,604.666
+                        c-1.151-0.016-2.097,0.903-2.113,2.055c-0.017,1.15,0.903,2.097,2.054,2.112c0.02,0.001,0.04,0.001,0.059,0h25.002
+                        c1.151,0.017,2.097-0.903,2.113-2.054s-0.903-2.097-2.054-2.113c-0.02,0-0.04,0-0.059,0H133.557z M133.557,613
+                        c-1.151-0.016-2.097,0.903-2.113,2.055c-0.017,1.15,0.903,2.097,2.054,2.112c0.02,0.001,0.04,0.001,0.059,0h25.002
+                        c1.151,0.017,2.097-0.903,2.113-2.054s-0.903-2.097-2.054-2.113c-0.02,0-0.04,0-0.059,0H133.557z M139.808,621.334
+                        c-1.151-0.016-2.097,0.903-2.113,2.055c-0.017,1.15,0.903,2.097,2.054,2.112c0.02,0.001,0.04,0.001,0.059,0h12.501
+                        c1.151,0.017,2.097-0.903,2.113-2.054s-0.903-2.097-2.054-2.113c-0.02,0-0.039,0-0.059,0H139.808z"/> 
+                </svg>
+            </div>
+
+            <div class="property">
+                <p>Temp: {{tempReading}}</p>
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43.5px" height="105px" viewBox="211.25 462.75 43.5 105" enable-background="new 211.25 462.75 43.5 105"
+     xml:space="preserve">
+                    <g>
+                        <linearGradient id="tempGrad" x1="0" x2="0" y1="0" y2="100%">
+                            <!-- <stop offset="{{mappedTempVal}}%" stop-color="white"/> -->
+                            <!-- <stop offset="0%" stop-color="white"/> -->
+                            <!-- <stop offset="90%" stop-color="blue"/>
+                            <stop offset="0%" stop-color="#00979D"/> -->
+                            <stop offset="{{mappedTempVal}}%" stop-color="white"/>
+                            <stop offset="0%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+                            <stop offset="51%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+                        </linearGradient>
+                        <path fill="url(#tempGrad)" d="M238.553,533.888v-58.38c0-3.011-2.464-5.475-5.475-5.475s-5.475,2.464-5.475,5.475v58.38
+                            c-5.063,2.138-8.617,7.146-8.617,12.987c0,7.783,6.309,14.092,14.091,14.092s14.091-6.309,14.091-14.092
+                            C247.169,541.035,243.616,536.025,238.553,533.888z"/>
+                        <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M233.007,565.524c-10.407,0-18.874-8.468-18.874-18.874c0-5.978,2.879-11.665,7.7-15.213l0.24-0.174
+                            c0.744-0.529,1.102-1.389,1.035-2.237c0.004-0.06,0.018-0.117,0.018-0.179v-53.442c0-5.448,4.432-9.881,9.88-9.881
+                            c5.449,0,9.881,4.433,9.881,9.881v53.502c0,0.057,0.012,0.108,0.016,0.163c-0.051,0.833,0.308,1.673,1.038,2.194
+                            c0.158,0.113,0.315,0.229,0.475,0.35c4.744,3.606,7.464,9.087,7.464,15.037C251.879,557.058,243.414,565.524,233.007,565.524z"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="property">
+                <p>Humidity: {{humidityReading}}</p>
+                <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96.378px" height="167.455px" viewBox="0 0 96.378 167.455" enable-background="new 0 0 96.378 167.455" xml:space="preserve">
+                    <path fill="none" stroke="#7FCBCD" stroke-width="3" d="M48.188,157.019c-14.124,0-27.25-7.375-35.114-19.727c-8.598-13.508-9.389-30.119-2.169-45.573
+                        c5.263-11.274,9.796-20.298,13.795-28.26C32.348,48.235,38.952,35.087,47.21,13.1l1-2.663l0.962,2.676
+                        c7.879,21.905,14.561,35.011,22.299,50.186c4.08,8.001,8.704,17.071,14.004,28.421l0,0c7.217,15.457,6.426,32.068-2.175,45.576
+                        C75.437,149.645,62.311,157.019,48.188,157.019z"/>
+                </svg> -->
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60.25px" height="101.25px" viewBox="0 0 60.25 101.25" enable-background="new 0 0 60.25 101.25" xml:space="preserve">
+                    <linearGradient id="humidityGrad" x1="0" x2="0" y1="0" y2="100%">
+                        <stop offset="{{mappedHumidityVal}}%" stop-color="white"/>
+                        <!-- <stop offset="0%" stop-color="white"/> -->
+                        <stop offset="0%" stop-color="#00979D"/>
+                    </linearGradient>
+                    <path fill="url(#humidityGrad)" stroke="#7FCBCD" stroke-width="3" d="M30.458,98.332c-9.154,0-17.661-4.78-22.757-12.785c-5.573-8.754-6.085-19.52-1.406-29.536
+                        c3.411-7.307,6.349-13.155,8.94-18.315c4.956-9.866,9.236-18.387,14.588-32.637l0.648-1.726l0.624,1.734
+                        c5.106,14.197,9.437,22.69,14.452,32.525c2.645,5.186,5.642,11.064,9.076,18.42l0,0c4.678,10.018,4.164,20.783-1.409,29.538
+                        C48.117,93.553,39.61,98.332,30.458,98.332z"/>
+                </svg>
+            </div>
+
+            <div class="property">
+                <p>RSSI: {{rssiReading}}</p>
+                <svg width="97px" height="68px" viewBox="0 0 97 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#a5aeaf">
+                    <path d="M35.7142857,54.9631127 L49,68 L62.2857143,54.9631127 C54.9785714,47.7493684 43.0657143,47.7493684 35.7142857,54.9631127" id="wifi_lo"></path>
+
+                    <path d="M18,37.5805963 L26.8571429,46.2718545 C39.08,34.2779181 58.92,34.2779181 71.1428571,46.2718545 L80,37.5805963 C62.9057143,20.8064679 35.1385714,20.8064679 18,37.5805963 " id="wifi_mid"></path>
+
+                    <path d="M0,20.1484166 L8.81818182,29 C30.7313636,7.00381534 66.2686364,7.00381534 88.1818182,29 L97,20.1484166 C70.2368182,-6.71613888 26.8072727,-6.71613888 0,20.1484166" id="wifi_hi"></path>
+                </svg>
+            </div>
+        </div>
+
+    </div>
+    <!-- <div>
+        <button ng-click="setServo(0)" class="btn">MoveServo(0)</button>
+        <button ng-click="setServo(180)" class="btn">MoveServo(180)</button>
+    </div> -->
+</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="97px" height="68px" viewBox="0 0 97 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="11_Dashboard-" transform="translate(-471.000000, -491.000000)" fill="#7F8C8D">
+            <g id="Group-11" transform="translate(171.000000, 413.000000)">
+                <g id="Group" transform="translate(300.000000, 78.000000)">
+                    <path d="M18,37.5805963 L26.8571429,46.2718545 C39.08,34.2779181 58.92,34.2779181 71.1428571,46.2718545 L80,37.5805963 C62.9057143,20.8064679 35.1385714,20.8064679 18,37.5805963 M35.7142857,54.9631127 L49,68 L62.2857143,54.9631127 C54.9785714,47.7493684 43.0657143,47.7493684 35.7142857,54.9631127" id="Fill-1"></path>
+                    <path d="M0,20.1484166 L8.81818182,29 C30.7313636,7.00381534 66.2686364,7.00381534 88.1818182,29 L97,20.1484166 C70.2368182,-6.71613888 26.8072727,-6.71613888 0,20.1484166" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
