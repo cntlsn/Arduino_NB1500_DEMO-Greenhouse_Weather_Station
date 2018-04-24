@@ -1,29 +1,29 @@
 @font-face {
     font-family: typonine;
-    src: url(/assets/TypSansPro/TyponineSansPro-Regular.otf);
+    src: url(/demoMKR1010/assets/TypSansPro/TyponineSansPro-Regular.otf);
     font-weight: 400;
 }
 
 @font-face {
     font-family: typonine;
-    src: url(/assets/TypSansPro/TyponineSansPro-Bold.otf);
+    src: url(/demoMKR1010/assets/TypSansPro/TyponineSansPro-Bold.otf);
     font-weight: 800;
 }
 
 @font-face {
     font-family: typonine;
-    src: url(/assets/TypSansPro/TyponineSansPro-Light.otf);
+    src: url(/demoMKR1010/assets/TypSansPro/TyponineSansPro-Light.otf);
     font-weight: 100;
 }
 
 @font-face {
     font-family: typonine;
-    src: url(/assets/TypSansPro/TyponineSansPro-Text.otf);
+    src: url(/demoMKR1010/assets/TypSansPro/TyponineSansPro-Text.otf);
     font-weight: 600;
 }
 
 @font-face {
     font-family: typonine;
-    src: url(/assets/TypSansPro/TyponineSansPro-Medium.otf);
+    src: url(/demoMKR1010/assets/TypSansPro/TyponineSansPro-Medium.otf);
     font-weight: 700;
 }
