@@ -32,9 +32,6 @@
 #include <WiFi1010.h>
 #include <SimpleDHT.h>
 
-//char ssid[] = "BCMI"; //  your network SSID (name)
-//char pass[] = "ArduinoccRulez"; // your network password
-
 
 //char ssid[] = "Casa Milo"; //  your network SSID (name)
 //char pass[] = "Milon3!?"; // your network password
