@@ -244,23 +244,26 @@
                 $scope.mappedLightValNum = (map(lightVal, 0, 1023, 0, 100)); 
 
                 // RSSI FUNCTION
-                if (rssiVal < -80) {
-                    document.getElementById("wifi_hi").style.fill = "#a5aeaf";
-                    document.getElementById("wifi_mid").style.fill = "#a5aeaf";
-                    document.getElementById("wifi_lo").style.fill = "#00979D";
-                } else if (rssiVal > -81 && rssiVal < -67) {
-                    document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                // if (rssiVal < -80) {
+                //     document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                //     document.getElementById("wifi_mid").style.fill = "#a5aeaf";
+                //     document.getElementById("wifi_lo").style.fill = "#00979D";
+                // } else if (rssiVal > -81 && rssiVal < -67) {
+                //     document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                //     document.getElementById("wifi_mid").style.fill = "#00979D";
+                //     document.getElementById("wifi_lo").style.fill = "#00979D";
+                // } else if (rssiVal > -68) {
+                //     document.getElementById("wifi_hi").style.fill = "#00979D";
+                //     document.getElementById("wifi_mid").style.fill = "#00979D";
+                //     document.getElementById("wifi_lo").style.fill = "#00979D";
+                // } else {
+                //     document.getElementById("wifi_hi").style.fill = "#a5aeaf";
+                //     document.getElementById("wifi_mid").style.fill = "#a5aeaf";
+                //     document.getElementById("wifi_lo").style.fill = "#a5aeaf";
+                // } 
+                document.getElementById("wifi_hi").style.fill = "#a5aeaf";
                     document.getElementById("wifi_mid").style.fill = "#00979D";
                     document.getElementById("wifi_lo").style.fill = "#00979D";
-                } else if (rssiVal > -68) {
-                    document.getElementById("wifi_hi").style.fill = "#00979D";
-                    document.getElementById("wifi_mid").style.fill = "#00979D";
-                    document.getElementById("wifi_lo").style.fill = "#00979D";
-                } else {
-                    document.getElementById("wifi_hi").style.fill = "#a5aeaf";
-                    document.getElementById("wifi_mid").style.fill = "#a5aeaf";
-                    document.getElementById("wifi_lo").style.fill = "#a5aeaf";
-                } 
 
                 // HUMIDITY FUNCTION
                 $scope.mappedHumidityVal = (map(humidityVal, 0, 100, 130, 0));  
