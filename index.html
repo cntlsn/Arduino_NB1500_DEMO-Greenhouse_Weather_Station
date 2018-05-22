@@ -25,11 +25,11 @@
         }
         body {
             /*background-color: rgb(132,254,213);*/
-            background-color: rgb(236,241,241);
+            /*background-color: rgb(236,241,241);*/
             /*text-align: center;*/
             width: 100%;
             height: 100%;
-            margin: 0!important;
+            margin: 0 auto;
             padding: 0!important;
             /*margin: 0 auto;
             display: flex;
@@ -43,6 +43,15 @@
             font-size: 16px;
             color: #005C5F;
         }
+        #container{
+            background-color: rgb(236,241,241);
+            width: 100%;
+            height: 100%;
+            margin: 0!important;
+            padding: 0!important;
+        }
+
+
         #reading{
             background-color: yellow;
             
@@ -310,7 +319,9 @@
 
 </script>
 
-<body ng-controller="ArduinoCtrl" class="container">
+<!-- <body ng-controller="ArduinoCtrl" class="container"> -->
+<body ng-controller="ArduinoCtrl">
+<div id="container">
     <div id="header">
         <div>
             <img src="assets/Global-Menu_Home-BBCube_teal.svg">
@@ -453,5 +464,6 @@
         <button ng-click="setServo(0)" class="btn">MoveServo(0)</button>
         <button ng-click="setServo(180)" class="btn">MoveServo(180)</button>
     </div> -->
+</div>
 </body>
 </html>
