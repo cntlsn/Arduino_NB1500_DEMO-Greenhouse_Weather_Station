@@ -24,7 +24,7 @@ byte temperature = 0;
 byte humidity = 0;
 byte DHTdata[40] = {0};
 
-#define LDR A0   // LDR on pin A0
+#define LDR A2   // LDR on pin A0
 int light;
 
 String rssi;    // variable to store WiFi wignal strength data
